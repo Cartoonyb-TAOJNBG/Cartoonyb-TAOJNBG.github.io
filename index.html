@@ -328,6 +328,28 @@
       }
     }
 
+
+    /* AD GATE - added without changing the original site design */
+    .ad-gate-overlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.78);backdrop-filter:blur(8px)}
+    .ad-gate-overlay.show{display:flex}
+    .ad-gate-box{width:min(520px,100%);background:linear-gradient(145deg,#101827,#07111f);border:1px solid rgba(77,166,255,.35);border-radius:24px;padding:28px 22px 24px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.65),0 0 35px rgba(0,119,255,.18);animation:adGateIn .25s ease}
+    @keyframes adGateIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .ad-gate-icon{width:70px;height:70px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(135deg,#1166dc,#008cff);font-size:31px;box-shadow:0 10px 30px rgba(17,102,220,.35)}
+    .ad-gate-box h3{font-family:'Cairo','Mirza',sans-serif;font-size:27px;margin-bottom:8px}
+    .ad-gate-box p{color:#cbd5e1;font-size:16px;line-height:1.8;margin-bottom:20px}
+    .ad-steps{display:grid;gap:10px;margin-bottom:18px}
+    .ad-step{width:100%;border:1px solid rgba(255,255,255,.09);border-radius:15px;padding:13px 15px;background:rgba(255,255,255,.055);color:#fff;cursor:pointer;font-family:'Cairo','Mirza',sans-serif;font-size:17px;font-weight:700;transition:.2s;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .ad-step:hover:not(:disabled){transform:translateY(-2px);background:rgba(17,102,220,.2);border-color:rgba(77,166,255,.5)}
+    .ad-step:disabled{cursor:default;opacity:.85}
+    .ad-step.done{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.45);color:#86efac}
+    .ad-step .step-state{font-size:14px;white-space:nowrap}
+    .watch-now{display:none;width:100%;border:0;border-radius:16px;padding:14px 18px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;font-family:'Cairo','Mirza',sans-serif;font-size:19px;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(34,197,94,.25);transition:.2s}
+    .watch-now.show{display:block;animation:adGateIn .25s ease}
+    .watch-now:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .ad-gate-close{margin-top:13px;background:transparent;border:0;color:#94a3b8;cursor:pointer;font-family:'Cairo','Mirza',sans-serif;font-size:14px}
+    .ad-gate-close:hover{color:#fff}
+    @media(max-width:600px){.ad-gate-box{padding:22px 15px 19px;border-radius:20px}.ad-gate-box h3{font-size:23px}.ad-gate-box p{font-size:14px}.ad-step{font-size:15px}}
+
   </style>
 
 </head>
@@ -376,37 +398,37 @@
 
   <div class="episodes">
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=isPGwXgR" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=isPGwXgR" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=isPGwXgR">
       <img src="https://i.postimg.cc/8ztLLtNF/image.png">
       <div class="card-title">إمبراطورية البيض تضرب من جديد</div>
     </a>
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=9jKsSm0o" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=9jKsSm0o" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=9jKsSm0o">
       <img src="https://i.postimg.cc/gJPcjbQ6/image.png">
       <div class="card-title">عملية إنقاذ جيت فيوجن</div>
     </a>
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=M36CrXMH" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=M36CrXMH" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=M36CrXMH">
       <img src="https://i.postimg.cc/wjhGHK5d/image.png">
       <div class="card-title">ساعة جيمي وتيمي للقوة.</div>
     </a>
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=juGeGJMi" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=juGeGJMi" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=juGeGJMi">
       <img src="https://i.postimg.cc/1XjLgpXp/image.png">
       <div class="card-title">الفوز، الخسارة والانفجار!</div>
     </a>
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=FqvP5Tgp" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=FqvP5Tgp" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=FqvP5Tgp">
       <img src="https://i.postimg.cc/nLS5S4Kg/image.png">
       <div class="card-title">هجوم التونكيز</div>
     </a>
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=RLuSXruv" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=RLuSXruv" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=RLuSXruv">
       <img src="https://i.postimg.cc/T16ct1Sp/image.png">
       <div class="card-title">ساعة جيمي وتيمي للقوة 2 - عندما يتصادم العباقرة</div>
     </a>
 
-    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=8WRWEz1w" class="card">
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=8WRWEz1w" class="card ad-gated-card" data-watch="https://t.me/TheAdventuresofJimmyNeutronBot?start=8WRWEz1w">
       <img src="https://i.postimg.cc/MGBRgx16/image.png">
       <div class="card-title">ساعة جيمي وتيمي للقوة 3 - الجيركيناتور</div>
     </a>
@@ -418,53 +440,130 @@
 
   <div class="episodes">
 
-    <a href="player.html" class="card">
+    <a href="player.html" class="card ad-gated-card" data-watch="player.html">
       <img src="https://i.postimg.cc/wvd04FwS/vlcsnap-2026-06-15-18h47m15s893.png">
       <div class="card-title">حلقة 1 - المثلجات</div>
     </a>
 
-    <a href="player2.html" class="card">
+    <a href="player2.html" class="card ad-gated-card" data-watch="player2.html">
       <img src="https://i.postimg.cc/MppXkjPx/vlcsnap-2026-06-15-20h24m49s143.png">
       <div class="card-title">حلقة 2 - مهمة سرية</div>
     </a>
 
-    <a href="player3.html" class="card">
+    <a href="player3.html" class="card ad-gated-card" data-watch="player3.html">
       <img src="https://i.postimg.cc/RZFHKwVm/vlcsnap-2026-06-16-19h00m22s639.png">
       <div class="card-title">حلقة 3 - منظمة الإبادة</div>
     </a>
 
-    <a href="player4.html" class="card">
+    <a href="player4.html" class="card ad-gated-card" data-watch="player4.html">
       <img src="https://i.postimg.cc/LsVkVmFd/vlcsnap-2026-06-16-19h37m35s016.png">
       <div class="card-title">حلقة 4 - المثلجات</div>
     </a>
 
-    <a href="player5.html" class="card">
+    <a href="player5.html" class="card ad-gated-card" data-watch="player5.html">
       <span class="translated-badge">مترجمة</span>
       <img src="https://i.postimg.cc/1z1yz0fM/mtrjmt-(1).png">
       <div class="card-title">حلقة 5 - القرصان</div>
     </a>
 
-    <a href="player6.html" class="card">
+    <a href="player6.html" class="card ad-gated-card" data-watch="player6.html">
       <img src="https://i.postimg.cc/Z5F6nn0x/vlcsnap-2026-06-17-13h43m17s891.png">
       <div class="card-title">حلقة 6 - راعية البقر</div>
     </a>
 
-    <a href="player7.html" class="card">
+    <a href="player7.html" class="card ad-gated-card" data-watch="player7.html">
       <img src="https://i.postimg.cc/KY4FbFtf/vlcsnap-2026-05-19-18h18m06s213.png">
       <div class="card-title">حلقة 7</div>
     </a>
 
-    <a href="player8.html" class="card">
+    <a href="player8.html" class="card ad-gated-card" data-watch="player8.html">
       <img src="https://i.postimg.cc/KY4FbFtf/vlcsnap-2026-05-19-18h18m06s213.png">
       <div class="card-title">حلقة 8</div>
     </a>
 
-    <a href="player9.html" class="card">
+    <a href="player9.html" class="card ad-gated-card" data-watch="player9.html">
       <img src="https://i.postimg.cc/KY4FbFtf/vlcsnap-2026-05-19-18h18m06s213.png">
       <div class="card-title">حلقة 9</div>
     </a>
 
   </div>
+
+
+  <!-- AD GATE -->
+  <div class="ad-gate-overlay" id="adGate" aria-hidden="true">
+    <div class="ad-gate-box" role="dialog" aria-modal="true" aria-labelledby="adGateTitle">
+      <div class="ad-gate-icon">▶</div>
+      <h3 id="adGateTitle">جهّز الحلقة للمشاهدة</h3>
+      <p>اضغط على أزرار الإعلانات الثلاثة. كل إعلان سيفتح في تبويب جديد، وبعد فتح الثلاثة سيظهر لك زر مشاهدة الحلقة.</p>
+      <div class="ad-steps">
+        <button class="ad-step" type="button" data-ad="0"><span>📺 مشاهدة الإعلان 1</span><span class="step-state">لم يُفتح</span></button>
+        <button class="ad-step" type="button" data-ad="1"><span>📺 مشاهدة الإعلان 2</span><span class="step-state">لم يُفتح</span></button>
+        <button class="ad-step" type="button" data-ad="2"><span>📺 مشاهدة الإعلان 3</span><span class="step-state">لم يُفتح</span></button>
+      </div>
+      <button class="watch-now" id="watchNow" type="button">▶ مشاهدة الحلقة</button>
+      <button class="ad-gate-close" id="adGateClose" type="button">إغلاق</button>
+    </div>
+  </div>
+
+  <script>
+    const AD_LINKS=[
+      'https://omg10.com/4/11602640',
+      'https://omg10.com/4/11602640',
+      'https://omg10.com/4/11602640'
+    ];
+    const adGate=document.getElementById('adGate');
+    const watchNow=document.getElementById('watchNow');
+    const closeGate=document.getElementById('adGateClose');
+    const adButtons=[...document.querySelectorAll('.ad-step')];
+    let currentWatchUrl='';
+    let openedAds=[false,false,false];
+
+    function openAdGate(url){
+      currentWatchUrl=url;
+      openedAds=[false,false,false];
+      adButtons.forEach(btn=>{
+        btn.disabled=false;
+        btn.classList.remove('done');
+        btn.querySelector('.step-state').textContent='لم يُفتح';
+      });
+      watchNow.classList.remove('show');
+      adGate.classList.add('show');
+      adGate.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function closeAdGate(){
+      adGate.classList.remove('show');
+      adGate.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+    adButtons.forEach((button,index)=>{
+      button.addEventListener('click',()=>{
+        if(openedAds[index]) return;
+        const adWindow=window.open(AD_LINKS[index],'_blank','noopener,noreferrer');
+        if(adWindow){
+          openedAds[index]=true;
+          button.disabled=true;
+          button.classList.add('done');
+          button.querySelector('.step-state').textContent='✓ تم فتحه';
+          if(openedAds.every(Boolean)) watchNow.classList.add('show');
+        }else{
+          alert('المتصفح منع فتح الإعلان. اسمح بالنوافذ المنبثقة لهذا الموقع ثم اضغط الزر مرة أخرى.');
+        }
+      });
+    });
+    watchNow.addEventListener('click',()=>{
+      if(currentWatchUrl && openedAds.every(Boolean)) window.location.href=currentWatchUrl;
+    });
+    closeGate.addEventListener('click',closeAdGate);
+    adGate.addEventListener('click',e=>{if(e.target===adGate) closeAdGate()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape' && adGate.classList.contains('show')) closeAdGate()});
+    document.querySelectorAll('.ad-gated-card').forEach(card=>{
+      card.addEventListener('click',e=>{
+        e.preventDefault();
+        openAdGate(card.dataset.watch);
+      });
+    });
+  </script>
 
   <!-- باقي المواسم كما هي بدون تغيير -->
 
