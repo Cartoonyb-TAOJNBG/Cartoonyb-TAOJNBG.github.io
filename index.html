@@ -3,6 +3,7 @@
 <head>
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="monetag" content="b12a6e51907a0a540be25d513748849d">
 
   <title>جيمي نيوترون</title>
@@ -350,6 +351,287 @@
     .ad-gate-close:hover{color:#fff}
     @media(max-width:600px){.ad-gate-box{padding:22px 15px 19px;border-radius:20px}.ad-gate-box h3{font-size:23px}.ad-gate-box p{font-size:14px}.ad-step{font-size:15px}}
 
+
+    /* EXTRA RESPONSIVE FIXES - keeps the original design and content */
+    html,body{
+      max-width:100%;
+      min-width:0;
+    }
+
+    body{
+      overflow-x:hidden;
+      -webkit-text-size-adjust:100%;
+    }
+
+    .hero-content,
+    .season,
+    .episodes{
+      min-width:0;
+    }
+
+    .hero-content{
+      width:100%;
+      max-width:1600px;
+      margin:0 auto;
+    }
+
+    .hero-text,
+    .hero-logo{
+      min-width:0;
+    }
+
+    .hero-text h1,
+    .hero-text h2,
+    .hero-text h3,
+    .hero-text p,
+    .card-title,
+    .season-title{
+      overflow-wrap:anywhere;
+      word-break:normal;
+    }
+
+    .hero-logo img{
+      max-width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+
+    .episodes{
+      grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));
+    }
+
+    .card{
+      min-width:0;
+    }
+
+    .card img{
+      width:100%;
+      height:auto;
+      min-height:0;
+    }
+
+    .ad-gate-overlay{
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .ad-gate-box{
+      max-height:calc(100vh - 40px);
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    @media(max-width:1200px){
+      .hero-content{
+        padding-left:clamp(25px,6vw,60px);
+        padding-right:clamp(25px,6vw,60px);
+        gap:clamp(25px,4vw,40px);
+      }
+
+      .hero-logo img{
+        width:min(480px,100%);
+      }
+
+      .season{
+        padding-left:clamp(18px,4vw,25px);
+        padding-right:clamp(18px,4vw,25px);
+      }
+    }
+
+    @media(max-width:900px){
+      .hero-content{
+        width:100%;
+        padding-left:clamp(18px,5vw,30px);
+        padding-right:clamp(18px,5vw,30px);
+      }
+
+      .hero-logo{
+        width:100%;
+      }
+
+      .hero-logo img{
+        width:min(360px,85vw);
+      }
+
+      .episodes{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:8px;
+      }
+
+      .card-title{
+        font-size:clamp(14px,2.2vw,18px);
+        line-height:1.45;
+      }
+    }
+
+    @media(max-width:600px){
+      .hero{
+        width:100%;
+        min-height:100svh;
+        padding-top:50px;
+        padding-bottom:110px;
+      }
+
+      .hero-content{
+        gap:25px;
+        padding-left:14px;
+        padding-right:14px;
+      }
+
+      .hero-logo img{
+        width:min(300px,80vw);
+      }
+
+      .hero-text h1{
+        font-size:clamp(34px,11vw,55px);
+      }
+
+      .hero-text h2{
+        font-size:clamp(25px,8vw,42px);
+      }
+
+      .hero-text h3{
+        font-size:clamp(18px,5.5vw,28px);
+      }
+
+      .hero-text p{
+        font-size:clamp(15px,4.2vw,20px);
+        line-height:1.8;
+      }
+
+      .line{
+        margin-bottom:22px;
+      }
+
+      .season{
+        padding:38px 12px 55px;
+      }
+
+      .season-title{
+        font-size:clamp(30px,9vw,48px);
+        margin-bottom:28px;
+      }
+
+      .episodes{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:7px;
+      }
+
+      .card{
+        border-radius:8px;
+      }
+
+      .card-title{
+        padding:9px 5px;
+        font-size:clamp(12px,3.4vw,16px);
+        line-height:1.35;
+      }
+
+      .translated-badge{
+        top:7px;
+        right:7px;
+        padding:5px 8px;
+        font-size:10px;
+        border-radius:9px;
+      }
+
+      .translated-badge::before{
+        margin-left:3px;
+        font-size:9px;
+      }
+
+      .wave svg{
+        width:100%;
+        height:80px;
+      }
+
+      .ad-gate-overlay{
+        padding:12px;
+      }
+
+      .ad-gate-box{
+        width:100%;
+        max-height:calc(100svh - 24px);
+        padding:20px 13px 17px;
+        border-radius:18px;
+      }
+
+      .ad-gate-icon{
+        width:58px;
+        height:58px;
+        font-size:25px;
+        margin-bottom:10px;
+      }
+
+      .ad-gate-box h3{
+        font-size:21px;
+      }
+
+      .ad-gate-box p{
+        font-size:13px;
+        line-height:1.7;
+      }
+
+      .ad-step{
+        min-height:52px;
+        padding:11px 12px;
+        font-size:14px;
+      }
+
+      .watch-now{
+        min-height:52px;
+        font-size:17px;
+      }
+    }
+
+    @media(max-width:380px){
+      .episodes{
+        grid-template-columns:1fr;
+      }
+
+      .card-title{
+        font-size:14px;
+        padding:10px 8px;
+      }
+
+      .hero-content{
+        padding-left:10px;
+        padding-right:10px;
+      }
+
+      .season{
+        padding-left:9px;
+        padding-right:9px;
+      }
+    }
+
+    @media(min-width:1600px){
+      .hero-content{
+        padding-left:80px;
+        padding-right:80px;
+      }
+
+      .episodes{
+        grid-template-columns:repeat(5,minmax(0,1fr));
+      }
+    }
+
+    @media(hover:none){
+      .card:hover{
+        transform:none;
+        box-shadow:0 6px 18px rgba(0,0,0,0.35);
+      }
+
+      .card:hover .translated-badge{
+        transform:none;
+      }
+
+      .ad-step:hover:not(:disabled),
+      .watch-now:hover{
+        transform:none;
+      }
+    }
+
   </style>
 
 </head>
@@ -539,15 +821,25 @@
     adButtons.forEach((button,index)=>{
       button.addEventListener('click',()=>{
         if(openedAds[index]) return;
-        const adWindow=window.open(AD_LINKS[index],'_blank','noopener,noreferrer');
-        if(adWindow){
-          openedAds[index]=true;
-          button.disabled=true;
-          button.classList.add('done');
-          button.querySelector('.step-state').textContent='✓ تم فتحه';
-          if(openedAds.every(Boolean)) watchNow.classList.add('show');
-        }else{
-          alert('المتصفح منع فتح الإعلان. اسمح بالنوافذ المنبثقة لهذا الموقع ثم اضغط الزر مرة أخرى.');
+
+        // فتح الإعلان كرابط مباشر من نقرة المستخدم، بدل window.open
+        // لتجنب مشكلة حظر النوافذ المنبثقة.
+        const adLink=document.createElement('a');
+        adLink.href=AD_LINKS[index];
+        adLink.target='_blank';
+        adLink.rel='noopener noreferrer';
+        adLink.style.display='none';
+        document.body.appendChild(adLink);
+        adLink.click();
+        adLink.remove();
+
+        openedAds[index]=true;
+        button.disabled=true;
+        button.classList.add('done');
+        button.querySelector('.step-state').textContent='✓ تم فتحه';
+
+        if(openedAds.every(Boolean)){
+          watchNow.classList.add('show');
         }
       });
     });
