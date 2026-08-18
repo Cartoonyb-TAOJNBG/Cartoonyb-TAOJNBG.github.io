@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="monetag" content="fc8262e75e8228c688853e257f2130f8">
+
+  <title>جيمي نيوترون</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mirza:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cascadia+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Mirza','Cairo',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#0d0d0d;
+      color:#fff;
+      overflow-x:hidden;
+      width:100%;
+      font-family:'Mirza','Cairo',sans-serif;
+    }
+
+    img{
+      max-width:100%;
+      height:auto;
+      display:block;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    /* HERO */
+
+    .hero{
+      width:100%;
+      min-height:100vh;
+      position:relative;
+      overflow:hidden;
+
+      background:
+      linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+      linear-gradient(to left,rgba(0,149,255,.30),rgba(0,0,0,.10)),
+      url('https://i.postimg.cc/htymMNcB/download-(10).jpg');
+
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width:100%;
+      min-height:100vh;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:40px;
+
+      padding:0 120px;
+    }
+
+    .hero-text{
+      max-width:560px;
+      width:100%;
+    }
+
+    .hero-text h1{
+      font-size:clamp(42px,8vw,78px);
+      font-weight:900;
+      margin-bottom:18px;
+      line-height:1.1;
+    }
+
+    .hero-text h2{
+      font-size:clamp(30px,6vw,58px);
+      font-weight:800;
+      margin-bottom:25px;
+      line-height:1.2;
+    }
+
+    .hero-text h3{
+      font-size:clamp(20px,4vw,36px);
+      margin-bottom:35px;
+      font-weight:700;
+    }
+
+    .line{
+      width:100%;
+      height:2px;
+      background:#dadada;
+      margin-bottom:35px;
+    }
+
+    .hero-text p{
+      font-size:clamp(16px,2.2vw,24px);
+      line-height:2;
+      color:#f1f1f1;
+      font-weight:700;
+    }
+
+    .hero-logo{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-logo img{
+      width:min(560px,100%);
+      filter:drop-shadow(0 0 15px rgba(0,0,0,.8));
+    }
+
+    /* BLUE WAVE */
+
+    .wave{
+      position:absolute;
+      bottom:-2px;
+      left:0;
+      width:100%;
+      overflow:hidden;
+      line-height:0;
+      z-index:5;
+    }
+
+    .wave svg{
+      width:calc(100% + 1.3px);
+      height:180px;
+      display:block;
+    }
+
+    .wave .shape-fill{
+      fill:#1166dc;
+    }
+
+    /* SEASON SECTION */
+
+    .season{
+      background:#1166dc;
+      padding:60px 25px 90px;
+      width:100%;
+    }
+
+    .season-title{
+      text-align:center;
+      font-size:clamp(38px,7vw,85px);
+      font-weight:900;
+      margin-bottom:45px;
+      line-height:1.2;
+    }
+
+    .episodes{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:6px;
+      width:100%;
+    }
+
+    .card{
+      overflow:hidden;
+      background:#000;
+      transition:.35s;
+      cursor:pointer;
+      border-radius:10px;
+      width:100%;
+      position:relative;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    }
+
+    .card:hover{
+      transform:translateY(-6px) scale(1.02);
+      box-shadow:0 12px 30px rgba(0,0,0,0.55);
+    }
+
+    .translated-badge{
+      position:absolute;
+      top:12px;
+      right:12px;
+      background:#e11d48;
+      color:#fff;
+      font-family:'Cascadia Mono', monospace;
+      font-size:13px;
+      font-weight:700;
+      padding:8px 14px;
+      border-radius:12px;
+      z-index:20;
+      box-shadow:
+        0 8px 25px rgba(225,29,72,.45),
+        inset 0 1px 0 rgba(255,255,255,.25);
+      backdrop-filter:blur(4px);
+      transition:.3s;
+    }
+
+    .translated-badge::before{
+      content:"★";
+      margin-left:6px;
+      font-size:12px;
+    }
+
+    .card:hover .translated-badge{
+      transform:translateY(-2px) scale(1.05);
+    }
+
+    .card img{
+      width:100%;
+      aspect-ratio:16/9;
+      object-fit:cover;
+      display:block;
+    }
+
+    .card-title{
+      background:#0057d8;
+      text-align:center;
+      padding:10px;
+      font-size:clamp(15px,2vw,18px);
+      font-weight:700;
+    }
+
+    /* SCROLLBAR */
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#1166dc;
+    }
+
+    ::-webkit-scrollbar-track{
+      background:#111;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1200px){
+      .hero-content{
+        padding:60px;
+      }
+    }
+
+    @media(max-width:900px){
+      .hero{
+        min-height:auto;
+        padding:80px 0 160px;
+      }
+
+      .hero-content{
+        min-height:auto;
+        flex-direction:column-reverse;
+        justify-content:center;
+        gap:50px;
+        text-align:center;
+        padding:0 30px;
+      }
+
+      .hero-text{
+        max-width:100%;
+      }
+
+      .line{
+        margin-inline:auto;
+      }
+    }
+
+    @media(max-width:700px){
+      .hero{
+        padding:80px 0 140px;
+      }
+
+      .hero-content{
+        padding:0 25px;
+      }
+
+      .hero-logo img{
+        width:280px;
+      }
+
+      .season{
+        padding:50px 18px 70px;
+      }
+
+      .episodes{
+        gap:4px;
+      }
+
+      .wave svg{
+        height:100px;
+      }
+    }
+
+    @media(max-width:600px){
+      .hero{
+        padding:60px 0 120px;
+      }
+
+      .hero-content{
+        padding:0 18px;
+        gap:30px;
+      }
+
+      .card-title{
+        padding:12px;
+      }
+    }
+
+    @media(max-width:350px){
+      .hero-text p{
+        line-height:1.9;
+      }
+
+      .season-title{
+        font-size:34px;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="hero-logo">
+      <img src="" alt="">
+    </div>
+
+    <div class="hero-text">
+
+      <h1 class="main-title">جيمي نيوترون</h1>
+
+<h3 class="main-title">- مدبلج عربي</h3>
+
+      <div class="line"></div>
+
+      <p>
+        بدون حذف
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="wave">
+    <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+      <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" class="shape-fill"></path>
+    </svg>
+  </div>
+
+</section>
+
+<!-- SEASON -->
+
+<section class="season">
+
+  <h2 class="season-title">الحلقات الخاصة</h2>
+
+  <div class="episodes">
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=isPGwXgR" class="card">
+      <img src="https://i.postimg.cc/8ztLLtNF/image.png">
+      <div class="card-title">إمبراطورية البيض تضرب من جديد</div>
+    </a>
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=9jKsSm0o" class="card">
+      <img src="https://i.postimg.cc/gJPcjbQ6/image.png">
+      <div class="card-title">عملية إنقاذ جيت فيوجن</div>
+    </a>
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=M36CrXMH" class="card">
+      <img src="https://i.postimg.cc/wjhGHK5d/image.png">
+      <div class="card-title">ساعة جيمي وتيمي للقوة.</div>
+    </a>
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=juGeGJMi" class="card">
+      <img src="https://i.postimg.cc/1XjLgpXp/image.png">
+      <div class="card-title">الفوز، الخسارة والانفجار!</div>
+    </a>
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=FqvP5Tgp" class="card">
+      <img src="https://i.postimg.cc/nLS5S4Kg/image.png">
+      <div class="card-title">هجوم التونكيز</div>
+    </a>
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=RLuSXruv" class="card">
+      <img src="https://i.postimg.cc/T16ct1Sp/image.png">
+      <div class="card-title">ساعة جيمي وتيمي للقوة 2 - عندما يتصادم العباقرة</div>
+    </a>
+
+    <a href="https://t.me/TheAdventuresofJimmyNeutronBot?start=8WRWEz1w" class="card">
+      <img src="https://i.postimg.cc/MGBRgx16/image.png">
+      <div class="card-title">ساعة جيمي وتيمي للقوة 3 - الجيركيناتور</div>
+    </a>
+
+  </div>
+<section class="season">
+
+  <h2 class="season-title">الموسم الأول</h2>
+
+  <div class="episodes">
+
+    <a href="player.html" class="card">
+      <img src="https://i.postimg.cc/wvd04FwS/vlcsnap-2026-06-15-18h47m15s893.png">
+      <div class="card-title">حلقة 1 - المثلجات</div>
+    </a>
+
+    <a href="player2.html" class="card">
+      <img src="https://i.postimg.cc/MppXkjPx/vlcsnap-2026-06-15-20h24m49s143.png">
+      <div class="card-title">حلقة 2 - مهمة سرية</div>
+    </a>
+
+    <a href="player3.html" class="card">
+      <img src="https://i.postimg.cc/RZFHKwVm/vlcsnap-2026-06-16-19h00m22s639.png">
+      <div class="card-title">حلقة 3 - منظمة الإبادة</div>
+    </a>
+
+    <a href="player4.html" class="card">
+      <img src="https://i.postimg.cc/LsVkVmFd/vlcsnap-2026-06-16-19h37m35s016.png">
+      <div class="card-title">حلقة 4 - المثلجات</div>
+    </a>
+
+    <a href="player5.html" class="card">
+      <span class="translated-badge">مترجمة</span>
+      <img src="https://i.postimg.cc/1z1yz0fM/mtrjmt-(1).png">
+      <div class="card-title">حلقة 5 - القرصان</div>
+    </a>
+
+    <a href="player6.html" class="card">
+      <img src="https://i.postimg.cc/Z5F6nn0x/vlcsnap-2026-06-17-13h43m17s891.png">
+      <div class="card-title">حلقة 6 - راعية البقر</div>
+    </a>
+
+    <a href="player7.html" class="card">
+      <img src="https://i.postimg.cc/KY4FbFtf/vlcsnap-2026-05-19-18h18m06s213.png">
+      <div class="card-title">حلقة 7</div>
+    </a>
+
+    <a href="player8.html" class="card">
+      <img src="https://i.postimg.cc/KY4FbFtf/vlcsnap-2026-05-19-18h18m06s213.png">
+      <div class="card-title">حلقة 8</div>
+    </a>
+
+    <a href="player9.html" class="card">
+      <img src="https://i.postimg.cc/KY4FbFtf/vlcsnap-2026-05-19-18h18m06s213.png">
+      <div class="card-title">حلقة 9</div>
+    </a>
+
+  </div>
+
+  <!-- باقي المواسم كما هي بدون تغيير -->
+
+</section>
+
+
+</body>
+</html>
