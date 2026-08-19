@@ -968,7 +968,41 @@
       }
     }
 
-  </style>
+  
+    /* VAST VIDEO AD GATE */
+    .vast-gate-overlay{position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(2,6,15,.92);backdrop-filter:blur(10px)}
+    .vast-gate-overlay.show{display:flex}
+    .vast-gate-box{width:min(920px,100%);max-height:96dvh;overflow:hidden;border:1px solid rgba(77,166,255,.28);border-radius:24px;background:linear-gradient(145deg,#0b1220,#050a12);box-shadow:0 30px 100px rgba(0,0,0,.7),0 0 50px rgba(0,119,255,.12);animation:vastGateIn .25s ease}
+    @keyframes vastGateIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .vast-head{padding:18px 20px 12px;text-align:center}
+    .vast-head h3{font-family:'Cairo','Mirza',sans-serif;font-size:clamp(21px,3vw,30px);font-weight:900;margin:0 0 5px;color:#fff}
+    .vast-head p{font-family:'Cairo','Mirza',sans-serif;color:#aebbd0;font-size:clamp(12px,1.8vw,15px);margin:0;line-height:1.7}
+    .vast-player-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
+    .vast-player-wrap video{width:100%;height:100%;display:block;background:#000;object-fit:contain}
+    .vast-ad-container{position:absolute;inset:0;z-index:2}
+    .vast-loading{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.65));pointer-events:none;transition:.2s}
+    .vast-loading.hidden{opacity:0;visibility:hidden}
+    .vast-spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.18);border-top-color:#38bdf8;border-radius:50%;animation:vastSpin .8s linear infinite;margin-bottom:12px}
+    @keyframes vastSpin{to{transform:rotate(360deg)}}
+    .vast-loading span{font-family:'Cairo','Mirza',sans-serif;color:#fff;font-weight:700;font-size:14px}
+    .vast-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px 15px}
+    .vast-status{font-family:'Cairo','Mirza',sans-serif;color:#cbd5e1;font-size:13px;line-height:1.6}
+    .vast-close{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#cbd5e1;border-radius:10px;padding:8px 14px;font-family:'Cairo','Mirza',sans-serif;cursor:pointer;transition:.2s}
+    .vast-close:hover{background:rgba(255,255,255,.1);color:#fff}
+    @media(max-width:600px){
+      .vast-gate-overlay{padding:8px}
+      .vast-gate-box{border-radius:17px;max-height:98dvh}
+      .vast-head{padding:13px 12px 9px}
+      .vast-head h3{font-size:20px}
+      .vast-head p{font-size:11px}
+      .vast-bottom{padding:9px 10px 11px}
+      .vast-status{font-size:11px}
+      .vast-close{font-size:12px;padding:7px 10px}
+    }
+
+</style>
+
+<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 
 </head>
 
@@ -1107,88 +1141,236 @@
   </div>
 
 
-  <!-- AD GATE -->
-  <div class="ad-gate-overlay" id="adGate" aria-hidden="true">
-    <div class="ad-gate-box" role="dialog" aria-modal="true" aria-labelledby="adGateTitle">
-      <div class="ad-gate-icon">▶</div>
-      <h3 id="adGateTitle">جهّز الحلقة للمشاهدة</h3>
-      <p>اضغط على أزرار الإعلانات الثلاثة. كل إعلان سيفتح في تبويب جديد، وبعد فتح الثلاثة سيظهر لك زر مشاهدة الحلقة.</p>
-      <div class="ad-steps">
-        <button class="ad-step" type="button" data-ad="0"><span>📺 مشاهدة الإعلان 1</span><span class="step-state">لم يُفتح</span></button>
-        <button class="ad-step" type="button" data-ad="1"><span>📺 مشاهدة الإعلان 2</span><span class="step-state">لم يُفتح</span></button>
-        <button class="ad-step" type="button" data-ad="2"><span>📺 مشاهدة الإعلان 3</span><span class="step-state">لم يُفتح</span></button>
+  <!-- VAST VIDEO AD GATE -->
+  <div class="vast-gate-overlay" id="vastGate" aria-hidden="true">
+    <div class="vast-gate-box" role="dialog" aria-modal="true" aria-labelledby="vastTitle">
+      <div class="vast-head">
+        <h3 id="vastTitle">🎬 إعلان قصير قبل الحلقة</h3>
+        <p>شاهد الإعلان، وبعد انتهائه سيتم تحويلك تلقائيًا إلى الحلقة.</p>
       </div>
-      <button class="watch-now" id="watchNow" type="button">▶ مشاهدة الحلقة</button>
-      <button class="ad-gate-close" id="adGateClose" type="button">إغلاق</button>
+
+      <div class="vast-player-wrap" id="vastPlayerWrap">
+        <video id="vastVideo" playsinline webkit-playsinline preload="auto"></video>
+        <div class="vast-ad-container" id="vastAdContainer"></div>
+        <div class="vast-loading" id="vastLoading">
+          <div class="vast-spinner"></div>
+          <span>جاري تجهيز الإعلان...</span>
+        </div>
+      </div>
+
+      <div class="vast-bottom">
+        <div class="vast-status" id="vastStatus">جاري تحميل الإعلان...</div>
+        <button class="vast-close" id="vastClose" type="button">رجوع</button>
+      </div>
     </div>
   </div>
 
   <script>
-    const AD_LINKS=[
-      'https://omg10.com/4/11602640',
-      'https://omg10.com/4/11602640',
-      'https://omg10.com/4/11602640'
-    ];
-    const adGate=document.getElementById('adGate');
-    const watchNow=document.getElementById('watchNow');
-    const closeGate=document.getElementById('adGateClose');
-    const adButtons=[...document.querySelectorAll('.ad-step')];
+    const VAST_AD_TAG='https://gloomy-association.com/dZm.FwzNd/GiNavrZwG/Uk/Oewmn9XuOZQUslDkPPHT/cEzhMuzYU/yLNGDkkHtQN/z/Maz/NWTzID1TMUwF';
+    const vastGate=document.getElementById('vastGate');
+    const vastVideo=document.getElementById('vastVideo');
+    const vastAdContainer=document.getElementById('vastAdContainer');
+    const vastPlayerWrap=document.getElementById('vastPlayerWrap');
+    const vastLoading=document.getElementById('vastLoading');
+    const vastStatus=document.getElementById('vastStatus');
+    const vastClose=document.getElementById('vastClose');
+
     let currentWatchUrl='';
-    let openedAds=[false,false,false];
+    let adsLoader=null;
+    let adsManager=null;
+    let adDisplayContainer=null;
+    let adRequestStarted=false;
+    let redirecting=false;
+    let fallbackAdStarted=false;
+    let fallbackSkipTimer=null;
 
-    function openAdGate(url){
-      currentWatchUrl=url;
-      openedAds=[false,false,false];
-      adButtons.forEach(btn=>{
-        btn.disabled=false;
-        btn.classList.remove('done');
-        btn.querySelector('.step-state').textContent='لم يُفتح';
-      });
-      watchNow.classList.remove('show');
-      adGate.classList.add('show');
-      adGate.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
+    function setVastStatus(message){
+      vastStatus.textContent=message;
     }
-    function closeAdGate(){
-      adGate.classList.remove('show');
-      adGate.setAttribute('aria-hidden','true');
+
+    function showVastLoading(show=true){
+      vastLoading.classList.toggle('hidden',!show);
+    }
+
+    function redirectToEpisode(){
+      if(redirecting || !currentWatchUrl) return;
+      redirecting=true;
+      setVastStatus('تم الإعلان ✓ جارٍ فتح الحلقة...');
+      setTimeout(()=>{ window.location.href=currentWatchUrl; },350);
+    }
+
+    function resetVast(){
+      redirecting=false;
+      adRequestStarted=false;
+      fallbackAdStarted=false;
+      if(fallbackSkipTimer) clearTimeout(fallbackSkipTimer);
+      fallbackSkipTimer=null;
+      currentWatchUrl='';
+      showVastLoading(true);
+      setVastStatus('جاري تحميل الإعلان...');
+      try{
+        if(adsManager){ adsManager.destroy(); }
+      }catch(e){}
+      adsManager=null;
+      vastAdContainer.innerHTML='';
+      vastVideo.removeAttribute('src');
+      try{ vastVideo.load(); }catch(e){}
+    }
+
+    function closeVastGate(){
+      if(redirecting) return;
+      try{ if(adsManager) adsManager.destroy(); }catch(e){}
+      adsManager=null;
+      vastGate.classList.remove('show');
+      vastGate.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
+      resetVast();
     }
-    adButtons.forEach((button,index)=>{
-      button.addEventListener('click',()=>{
-        if(openedAds[index]) return;
 
-        // فتح الإعلان كرابط مباشر من نقرة المستخدم، بدل window.open
-        // لتجنب مشكلة حظر النوافذ المنبثقة.
-        const adLink=document.createElement('a');
-        adLink.href=AD_LINKS[index];
-        adLink.target='_blank';
-        adLink.rel='noopener noreferrer';
-        adLink.style.display='none';
-        document.body.appendChild(adLink);
-        adLink.click();
-        adLink.remove();
+    function onAdError(errorEvent){
+      console.warn('VAST/IMA error:',errorEvent);
+      if(fallbackAdStarted) return;
 
-        openedAds[index]=true;
-        button.disabled=true;
-        button.classList.add('done');
-        button.querySelector('.step-state').textContent='✓ تم فتحه';
+      // Fallback مباشر من MediaFile الموجود داخل VAST الذي زودتنا به الشبكة.
+      // هذا يجعل الإعلان يعمل حتى لو منع المتصفح طلب VAST/IMA بسبب CORS
+      // أو إذا كان الموقع يعمل محليًا من file://.
+      startDirectVastFallback();
+    }
 
-        if(openedAds.every(Boolean)){
-          watchNow.classList.add('show');
-        }
+    function onAdsManagerLoaded(adsManagerLoadedEvent){
+      const adsRenderingSettings=new google.ima.AdsRenderingSettings();
+      adsRenderingSettings.enablePreloading=true;
+
+      adsManager=adsManagerLoadedEvent.getAdsManager(vastVideo,adsRenderingSettings);
+      adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,onAdError);
+      adsManager.addEventListener(google.ima.AdEvent.Type.LOADED,()=>{
+        showVastLoading(false);
+        setVastStatus('الإعلان يعمل الآن...');
       });
-    });
-    watchNow.addEventListener('click',()=>{
-      if(currentWatchUrl && openedAds.every(Boolean)) window.location.href=currentWatchUrl;
-    });
-    closeGate.addEventListener('click',closeAdGate);
-    adGate.addEventListener('click',e=>{if(e.target===adGate) closeAdGate()});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape' && adGate.classList.contains('show')) closeAdGate()});
+      adsManager.addEventListener(google.ima.AdEvent.Type.STARTED,()=>{
+        showVastLoading(false);
+        setVastStatus('🎬 شاهد الإعلان، وبعد انتهائه ستفتح الحلقة تلقائيًا');
+      });
+      adsManager.addEventListener(google.ima.AdEvent.Type.SKIPPED,redirectToEpisode);
+      adsManager.addEventListener(google.ima.AdEvent.Type.COMPLETE,()=>{
+        setVastStatus('اكتمل الإعلان ✓ جارٍ فتح الحلقة...');
+      });
+      adsManager.addEventListener(google.ima.AdEvent.Type.ALL_ADS_COMPLETED,redirectToEpisode);
+
+      const width=Math.max(320,vastVideo.clientWidth || vastAdContainer.clientWidth || 640);
+      const height=Math.max(180,vastVideo.clientHeight || vastAdContainer.clientHeight || 360);
+
+      try{
+        adsManager.init(width,height,google.ima.ViewMode.NORMAL);
+        adsManager.start();
+      }catch(error){
+        onAdError(error);
+      }
+    }
+
+    function fireTracking(url){
+      if(!url) return;
+      try{
+        const img=new Image();
+        img.src=url;
+      }catch(e){}
+    }
+
+    function startDirectVastFallback(){
+      if(fallbackAdStarted) return;
+      fallbackAdStarted=true;
+      showVastLoading(false);
+      setVastStatus('🎬 الإعلان يعمل الآن...');
+
+      // MP4 الموجود في VAST المرسل من HilltopAds.
+      const fallbackVideoUrl='https://www.silent-basis.pro/152327/199275/559490_eda68z.mp4';
+      const impressionUrl='https://gloomy-association.com/drmsF_z.duGvVw2xZ-Wz5A0BPC2_FEkFSGWHQ-9JNKTLUM5_NODPkQwRJ-mTFUkVdWn_NY1ZYambl-kdPeSfZgh_ci2jMk9lM-inZolpdqm_VsutduFvR-5xcyGzUA9_NCSDZEwFY-XHlIvJdKX_QM9NMOCPZ-yRZSXTZUl_bWnXVYlZP-TbAcmdcen_JgphZiDj0-2lNmjnIoy_NqWrMs2tY-TvAwyxZyT_NAiBMCGDR-lFMG2HJIl_ZKjLEMyNZ-jPNQkROSG_ZUkVOWGXQ-3ZNaybZcy_ce3fJgjhP-XjZkhlcm3_Rojpbq2rR-ltJunvNwJ_ZyDz0AmBc-0DlEkFMGj_0ImJcK0Ll-kNMOzP0Qm_cS3TMU9VN-SXZYzZdaD_0cxdJenfR-vhai2jVku_PmSnZo1pb-mrlsxtQun_lwaxby2z5-lBPCTDEEm_dGWH5IpJc-ULJM5NWOm_9QuRZSVTR-5VcWGXUY9_MaSbZc2dY-XfNg0hViG_9krlZmWn4-9pQq2rdsK_RulvJw4xS-UzpAZBbCk_pE2FWGVHd-SJaKVLlMX_NOWPtQLRa-UTEUyVTW1_RYZZMa1bp-XdTeTfNgN_ailjlk4lW-WnpoOpaql_lsttVuTvJ-ZxVyGztA4_WCkDREjFN-UH9IHJTKT_JMZNaOmPs-xRTSVTdUN_MWkX1YEZQ-2b5c1dNeW_JgVhQimjp-plVm2nlon_VqSr0smte-mv9wuxZyU_lAkBPCTDc-zFMGzHUIy_NKDLkM';
+      const startUrl='https://gloomy-association.com/dsm_Fuzvd.GwVx2-ZzWA5B0CP_2EFFkGSHW-QJ9KNLTMU_5ONPDQkRw-JTmUFVkWd_nYNZ1aYbm-ldkePfSgZ_hicj2kMl9-MnioZplqd_msVtuudvF-Rx5yczGAU_9CMDiEZFw-YHXIlJvKd_XMQN9OMPC-ZRySZTXUZ_lWbXnYVZl-PbTcAdmec_ngJhpiZjD-0l2mNnjoI_yqNrWsMt2-YvTwAxyyZ_TANBiCMDG-RFlGMH2IJ_lKZLjMENy-ZPjQNRkSO_GUZVkWOXG-QZ3aNbycZ_yecf3gJhj-PjXkZlhmc_3oRpjqbr2-RtluJvnwN_JyZzDA0Bm-cD0ElFkGM_jI0JmKcL0-lNkOMPzQ0_mScT3UMU9VN9-NXSYZZzad_Dc0dxeJfn-Rhviaj2kV_umPnSoZp1-brmsltxuQ_nwlxaybz2-5BlCPDTEE_mGdHWI5Jp-cULJM5NWOm_9QuRZSVTR-5VWWmX9Yu_ZaVbRc5dc-GfUg9hMiS_Zk2lYmXnN-0pVqGr9sr_ZuWv4w9xQ-2zdAKBRCl_JE4FSGUHp-ZJbKkLpM2_WOVPdQSRa-VTlUXVNWW_tYLZaaUbE-ydTe1fRgZ_Mi1jpkXlT-TnNoNpaql_ls4tWuWvp-OxaylzlAt_4CWDkERFj-NHUI9JHKT_TMJNZOaPm-sRxSTTVUd_NWMXkY1ZE-Qb2c5d1eN_WgJhViQjm-plVm2nlon_VqSr0smte-mv9wuxZyU_lAkBPCTDc-zFMGzHUIy_NKDLkM';
+      fireTracking(impressionUrl);
+
+      vastVideo.controls=false;
+      vastVideo.src=fallbackVideoUrl;
+      vastVideo.load();
+
+      const startPlayback=()=>{
+        fireTracking(startUrl);
+        const promise=vastVideo.play();
+        if(promise && promise.catch){
+          promise.catch(()=>{
+            vastVideo.muted=true;
+            vastVideo.play().catch(()=>{
+              setVastStatus('اضغط على الإعلان لتشغيله');
+              vastVideo.controls=true;
+            });
+          });
+        }
+      };
+
+      vastVideo.onloadeddata=startPlayback;
+      vastVideo.onended=()=>{
+        if(fallbackSkipTimer) clearTimeout(fallbackSkipTimer);
+        redirectToEpisode();
+      };
+
+      // الإعلان في الـVAST مدته نحو 31 ثانية، والتخطي مسموح بعد 15 ثانية.
+      fallbackSkipTimer=setTimeout(()=>{
+        if(!redirecting){
+          setVastStatus('يمكنك تخطي الإعلان الآن');
+          vastVideo.controls=true;
+        }
+      },15000);
+    }
+
+    function requestVastAd(){
+      if(adRequestStarted) return;
+      adRequestStarted=true;
+
+      if(!window.google || !google.ima){
+        onAdError(new Error('IMA SDK لم يتم تحميله'));
+        return;
+      }
+
+      try{
+        adDisplayContainer=new google.ima.AdDisplayContainer(vastAdContainer,vastVideo);
+        // يتم الاستدعاء بعد نقرة المستخدم، لذلك يسمح المتصفح بتشغيل الإعلان.
+        adDisplayContainer.initialize();
+
+        adsLoader=new google.ima.AdsLoader(adDisplayContainer);
+        adsLoader.getSettings().setVpaidMode(google.ima.ImaSdkSettings.VpaidMode.ENABLED);
+        adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,onAdsManagerLoaded,false);
+        adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,onAdError,false);
+
+        const adsRequest=new google.ima.AdsRequest();
+        adsRequest.adTagUrl=VAST_AD_TAG;
+        adsRequest.linearAdSlotWidth=Math.max(320,vastPlayerWrap.clientWidth || 640);
+        adsRequest.linearAdSlotHeight=Math.max(180,vastPlayerWrap.clientHeight || 360);
+        adsRequest.nonLinearAdSlotWidth=adsRequest.linearAdSlotWidth;
+        adsRequest.nonLinearAdSlotHeight=Math.max(90,Math.round(adsRequest.linearAdSlotHeight/3));
+        adsRequest.setAdWillAutoPlay(true);
+        adsRequest.setAdWillPlayMuted(false);
+        adsLoader.requestAds(adsRequest);
+      }catch(error){
+        onAdError(error);
+      }
+    }
+
+    function openVastGate(url){
+      resetVast();
+      currentWatchUrl=url;
+      vastGate.classList.add('show');
+      vastGate.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      requestVastAd();
+    }
+
+    vastClose.addEventListener('click',closeVastGate);
+    vastGate.addEventListener('click',e=>{ if(e.target===vastGate) closeVastGate(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape' && vastGate.classList.contains('show')) closeVastGate(); });
+
     document.querySelectorAll('.ad-gated-card').forEach(card=>{
       card.addEventListener('click',e=>{
         e.preventDefault();
-        openAdGate(card.dataset.watch);
+        openVastGate(card.dataset.watch);
       });
     });
   </script>
